@@ -48,7 +48,10 @@ class LongitudinalPlannerSP:
     v_cruise_cluster_kph = min(CS.vCruiseCluster, V_CRUISE_MAX)
     v_cruise_cluster = v_cruise_cluster_kph * CV.KPH_TO_MS
 
-    long_enabled = sm['carControl'].enabled
+    # Lateral-only MADS cars have carControl.enabled=False (no openpilot longitudinal).
+    # When openpilot steers (latActive) and stock cruise is engaged, ICBM manages the
+    # set-speed via cruise buttons, so SCC-V should compute curve targets to feed it.
+    long_enabled = sm['carControl'].enabled or (sm['carControl'].latActive and CS.cruiseState.enabled)
     long_override = sm['carControl'].cruiseControl.override
 
     # Smart Cruise Control

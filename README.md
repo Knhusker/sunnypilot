@@ -1,3 +1,19 @@
+# 🚗 LX3 Port Notice
+
+This branch (`lx3-hda1`) adds support for **2026 Hyundai Palisade Hybrid (without HDA II / LFA2)** and similar 2026 Hyundai/Kia LFA2 platforms.
+
+**👉 See [INSTALL_LX3.md](./INSTALL_LX3.md) for LX3-specific install and usage instructions.**
+
+Status:
+- ✅ Lateral (steering) tested and working
+- ⚠️ Longitudinal not yet validated (use stock Hyundai SCC)
+
+Three linked repos: [openpilot](https://github.com/kamdeva/openpilot/tree/lx3-hda1) · [opendbc](https://github.com/kamdeva/opendbc/tree/lx3-hda1) · [msgq](https://github.com/kamdeva/msgq/tree/lx3-hda1)
+
+Clone with: `git clone --recursive --branch lx3-hda1 https://github.com/kamdeva/openpilot.git`
+
+---
+
 ![](https://user-images.githubusercontent.com/47793918/233812617-beab2e71-57b9-479e-8bff-c3931347ca40.png)
 
 ## 🌞 What is sunnypilot?

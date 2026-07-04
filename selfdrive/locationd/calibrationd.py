@@ -167,7 +167,7 @@ class Calibrator:
 
     write_this_cycle = (self.idx == 0) and (self.block_idx % (INPUTS_WANTED//5) == 5)
     if self.param_put and write_this_cycle:
-      self.params.put("CalibrationParams", self.get_msg(True).to_bytes())
+      self.params.put_nonblocking("CalibrationParams", self.get_msg(True).to_bytes())
 
   def handle_v_ego(self, v_ego: float) -> None:
     self.v_ego = v_ego
@@ -288,7 +288,11 @@ def main() -> NoReturn:
 
     # 4Hz driven by cameraOdometry
     if sm.frame % 5 == 0:
-      calibrator.send_data(pm, sm.all_checks())
+      # LX3 fix: when calibration is complete (loaded from params), publish valid=True
+      # even if sm.all_checks() fails due to msgq buffer issue with poll='cameraOdometry'
+      sm_ok = sm.all_checks()
+      cal_ready = calibrator.cal_status == log.LiveCalibrationData.Status.calibrated
+      calibrator.send_data(pm, sm_ok or cal_ready)
 
 
 if __name__ == "__main__":

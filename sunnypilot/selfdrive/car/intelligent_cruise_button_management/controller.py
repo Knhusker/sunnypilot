@@ -108,7 +108,10 @@ class IntelligentCruiseButtonManagement:
   def update_readiness(self, CS: car.CarState, CC: car.CarControl) -> None:
     update_manual_button_timers(CS, self.cruise_button_timers)
 
-    ready = CC.enabled and not CC.cruiseControl.override and not CC.cruiseControl.cancel and not CC.cruiseControl.resume
+    # MADS lateral-only cars steer with latActive=True but enabled=False (no openpilot
+    # longitudinal). Treat lateral engagement as sufficient for ICBM to manage set-speed.
+    engaged = CC.enabled or CC.latActive
+    ready = engaged and not CC.cruiseControl.override and not CC.cruiseControl.cancel and not CC.cruiseControl.resume
     button_pressed = any(self.cruise_button_timers[k] > 0 for k in self.cruise_button_timers)
 
     self.is_ready = ready and not button_pressed

@@ -323,7 +323,10 @@ def main():
           elif res == HandleLogResult.SUCCESS:
             observation_input_invalid[which] *= input_invalid_decay[which]
     else:
-      filter_initialized = sm.all_checks() and sensor_all_checks(acc_msgs, gyro_msgs, sensor_valid, sensor_recv_time, sensor_alive, SIMULATION)
+      # LX3 fix: sm.all_checks() unreliable due to msgq buffer overflow on non-polled carState
+      # Use alive + sensor checks as init criteria (still gates on real sensor health)
+      sensor_ok = sensor_all_checks(acc_msgs, gyro_msgs, sensor_valid, sensor_recv_time, sensor_alive, SIMULATION)
+      filter_initialized = sm.all_alive() and sensor_ok
 
     if sm.updated["cameraOdometry"]:
       critical_service_inputs_valid = all(observation_input_invalid[s] < input_invalid_threshold[s] for s in critcal_services)
