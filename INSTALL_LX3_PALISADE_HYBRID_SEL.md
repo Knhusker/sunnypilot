@@ -31,7 +31,7 @@ transfer to the port on the bottom.
 From a dos command prompt, use "adb shell" to connect.  You will be working 
 in a Linux environment.
 
-Cophy and paste this block into the adb window, or run the commands one at a time.
+Copy and paste this block into the adb window, or run the commands one at a time.
 
 echo "
 cd /data
@@ -47,6 +47,7 @@ export PYTHONPATH=/data/openpilot
 scons -j4
 sudo reboot" > /tmp/buildsp.sh
 bash -x /tmp/buildsp.sh
+
 After reboot, the Comma device will run with the LX3-patched code. Panda 
 firmware will be flashed automatically by pandad on first boot if the 
 firmware on the panda is older than what's compiled in this branch.
@@ -56,4 +57,8 @@ it is NOT sending any accel/decel messages so the car is still managing
 the speed, but without it the car seems to "hunt" for the right speed
 with quick acceleration and deceleration visible on the display on the
 right side of the car console.
+
+Do NOT enable "Use Lane Turn Desires".  After turning a corner, the 
+calculated track will want to keep right on turning, even though the
+camera shows lane markers going straight.
 
