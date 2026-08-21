@@ -1,4 +1,4 @@
-Build 2026 Palisade HDA1 on a Comma 3x
+Build 2026 Palisade HDA1 on a Comma 3x.
 
 The 2026 Palisade with HDA1 is not formally supported on Openpilot or Sunnypilot.  The code has been modified using a fork from "kamdeva" that got a good start, but more work was needed for the Palisade Hybrid SEL. If your car has the same fingerprint, it will be detected automatically.
 
