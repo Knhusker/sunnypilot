@@ -14,9 +14,10 @@ From a dos command prompt, use "adb shell" to connect.  You will be working in a
 
 Copy and paste this block into the adb window, or run the commands one at a time.
 
-echo "
+
+```bash
 cd /data
-sudo chmod 777 /data/scons\_cache
+sudo chmod 777 /data/scons_cache
 sudo mount -o remount,rw /
 sudo rm -rf openpilot
 git config --global --add safe.directory /data/openpilot
@@ -26,9 +27,8 @@ git lfs pull
 source /usr/local/venv/bin/activate
 export PYTHONPATH=/data/openpilot
 scons -j4
-sudo reboot" > /tmp/buildsp.sh
-bash -x /tmp/buildsp.sh
-
+sudo reboot
+```
 
 After reboot, the Comma device will run with the LX3-patched code. Panda firmware will be flashed automatically by pandad on first boot if thef firmware on the panda is older than what's compiled in this branch.
 
