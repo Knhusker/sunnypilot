@@ -10,6 +10,8 @@ Use ssh or adb to connect to the Comma.  An AI tool such as Claude can explain h
 
 Copy and paste this block into the shell windows.  The commands will be displayed and executed one at a time.
 
+
+```bash
 cat > /tmp/build.sh << 'EOF'
 cd /data
 sudo chmod 777 /data/scons_cache
@@ -25,6 +27,8 @@ scons -j4
 sudo reboot
 EOF
 bash -x /tmp/build.sh
+```
+
 
 After reboot, the Comma device will run with the LX3-patched code. Panda firmware will be flashed automatically by pandad on first boot if thef firmware on the panda is older than what's compiled in this branch.
 
