@@ -12,8 +12,9 @@ MIN_STABLE_DELAY = 0.3
 
 # EU guidelines
 MAX_LATERAL_JERK = 5.0  # m/s^3
-MAX_LATERAL_ACCEL_NO_ROLL = 3.0  # m/s^2
-
+#kcn -- change from 3.0 to allow tighter turn 
+# and avoid warning on relatively mild curves
+MAX_LATERAL_ACCEL_NO_ROLL = 4.5  # m/s^2 
 
 def clamp(val, min_val, max_val):
   clamped_val = float(np.clip(val, min_val, max_val))
