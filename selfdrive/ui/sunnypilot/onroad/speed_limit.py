@@ -189,13 +189,14 @@ class SpeedLimitRenderer(Widget, SpeedLimitAlertRenderer):
     sign_rect = rl.Rectangle(x, y, width, UI_CONFIG.set_speed_height + 6 * 2)
 
     alpha = self._pre_active_fade.alpha
-
+    
     if ui_state.speed_limit_mode != SpeedLimitMode.off:
-      self._draw_sign_main(sign_rect, alpha)
-      if self.speed_limit_assist_state == AssistState.preActive:
-        self._draw_pre_active_arrow(sign_rect)
-      else:
-        self._draw_ahead_info(sign_rect)
+      if self.speed_limit_valid:  # kcn - don't show widget when no current speed limit data
+        self._draw_sign_main(sign_rect, alpha)
+        if self.speed_limit_assist_state == AssistState.preActive:
+            self._draw_pre_active_arrow(sign_rect)
+        else:
+            self._draw_ahead_info(sign_rect)
 
   def _draw_sign_main(self, rect, alpha=1.0):
     speed_limit_warning_enabled = ui_state.speed_limit_mode >= SpeedLimitMode.warning
