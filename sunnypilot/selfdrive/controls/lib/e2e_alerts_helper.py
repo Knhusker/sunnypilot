@@ -15,6 +15,7 @@ from openpilot.sunnypilot.selfdrive.selfdrived.events import EventsSP
 GREEN_LIGHT_X_THRESHOLD = 30
 LEAD_DEPART_DIST_THRESHOLD = 1.0
 TRIGGER_TIMER_THRESHOLD = 0.3
+TRIGGER_TIMER_THRESHOLD = 2.0  # kcn - increased from 0.3 to 2.0 seconds delay
 
 
 class E2EStates:
